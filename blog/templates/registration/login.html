@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class = 'jumbotron'>
+<h2>Please Login:</h2>
+<h3>(must be SuperUser,please check with the site admin)</h3>
+
+{% if form.errors %}
+
+ <p> Your username and password didn't match! Please try again.</p>
+ 
+{% endif %}
+
+
+<form action="{% url 'login' %}" method='POST'>
+	{% csrf_token %}
+		{{ form.as_p }}
+		<input type='submit' class='btn btn-primary' value ='Login'>
+		<input type='hidden' name='next' value='{{next}}'> <!-- next keyword is provided by the login view of contrib.auth in clonesite's urls.py-->
+		
+
+</form>
+
+</div>
+
+{% endblock %}
